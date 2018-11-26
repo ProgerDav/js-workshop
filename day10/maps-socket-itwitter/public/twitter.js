@@ -7,20 +7,15 @@ socket.on('accepted', data => {
     }
 });
 
+
 function sendGeocode(lat, lng) {
     socket.emit('geocode', { lat, lng });
     socket.on(`${lat},${lng}`, data => {
         if (data.statuses.length > 0) {
             changeMarkerIcon(lat, lng);
         }
-        $('#main').html('');
-        data.statuses.map(status =>  {
-            console.log(status);
-            const text = status.text;
-            const name = status.user.name;
-            const img_url = status.user.profile_image_url;
-            const img = `<div class="image_twitter"><img src="${img_url}"/></div>`;
-            $('#main').append("<div class='block_divs'><h1>" + name + "</h1>" + img + "<p>" + text + "</p>" + "</div>")
-        });
+        statuses[`${lat},${lng}`] = data.statuses;
+        console.log(statuses);
     });
 }
+

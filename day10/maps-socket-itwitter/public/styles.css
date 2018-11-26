@@ -10,27 +10,28 @@
 }
 input{
     width: 300px;
-    height: 50px;
-    text-align: center;
     font-size: 22px;
-    border: 2px solid #38A1F3;
+    padding: 10px 7px;
+    border: none;
+    border-bottom: 2px solid #38A1F3;
 }
 input:focus {
-    border: 2px solid #38A1F3;
+    border: .8px solid #38A1F3;
+    border-bottom: 2px solid #38A1F3;
     outline: none;
     border-color: #38A1F3;
-
 }
 button{
-    width: 60px;
     height: 49.5px;
     position: relative;
-    top: -2px;
     background-color: #38A1F3;
     border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 22px;
 }
 #form{
-    width: 364px;
+    width: auto;
     margin: auto;
 }
 #map {
@@ -44,18 +45,24 @@ button{
 html, body {
     height: 100%;
     margin: 0;
+    text-align: center;
     padding: 0;
 }
+.img{
+    width: 180px;
+    height: auto;
+    margin: 60px auto;
+}
 #main {
-    position: absolute;
-    right: -300px;
-    top: 20px;
-    width: 300px;
+    position: fixed;
+    right: -30%;
+    width: 30%;
     height: 100%;
     float: right;
     overflow-y: auto;
-    background: #ffffff;
+    background: rgba(255, 255, 255, .8);
     z-index: 12;
+    text-align: center;
 }
 
 #main.active {

@@ -45,6 +45,8 @@ function initMap() {
     });
 }
 
+const statuses = {};
+
 function addMarker(location) {
     const lat = location.lat();
     const lng = location.lng();
@@ -60,12 +62,18 @@ function addMarker(location) {
     mapMarkers[`${lat},${lng}`] = marker;
     marker.addListener('click', function() {
         $('#main').toggleClass('active');
+        AppendStatuses(statuses[`${lat},${lng}`]);
         marker.setIcon({
             url: 'https://i.imgur.com/hijJqx6.png',
             scaledSize: new google.maps.Size(50, 50),
         });
     });
+    marker.addListener('rightclick', function() {
+        alert();
+    });
 }
+
+
 
 function changeMarkerIcon(lat, lng) {
     const marker = mapMarkers[`${lat},${lng}`];
@@ -94,4 +102,20 @@ function changeLocationQuery(lat, lng) {
     });
     window.history.pushState("", "",
         `/?query=${JSON.stringify(latLngs)}`);
+}
+
+
+function AppendStatuses(data){
+    $('#main').html('');
+    if(!data){
+        $('#main').html("<img src='/loading.gif' class='img'>");
+        return;
+    }
+    data.map(status =>  {
+        const text = status.text;
+        const name = status.user.name;
+        const img_url = status.user.profile_image_url;
+        const img = `<div class="image_twitter"><img src="${img_url}"/></div>`;
+        $('#main').append("<div class='block_divs'><h1>" + name + "</h1>" + img + "<p>" + text + "</p>" + "</div>")
+    });
 }
